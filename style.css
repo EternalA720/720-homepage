@@ -38,14 +38,33 @@ body {
 }
 
 .intro-text {
-    /* 1. 字体大小控制 */
-    font-size: 2.5rem; /* 推荐：在大屏幕上足够醒目，约 40px */
+    /* 1. 字体族：优先调用系统中最具设计感的无衬线字体 */
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Inter", sans-serif;
 
-    /* 2. 字重（粗细）控制 */
-    font-weight: 700; /* 700 为加粗，让名字更有力量感 */
+    /* 2. 字号与粗细：2.5rem 足够醒目，500-600 的准粗体比纯粗体更精致 */
+    font-size: 2.5rem;
+    font-weight: 600;
 
-    /* 3. 字体间距（可选） */
-    letter-spacing: 2px; /* 让中文字符之间有一点点空隙，更具现代感 */
+    /* 3. 核心美化：增加字间距，这是提升高级感的绝招 */
+    letter-spacing: 0.15em; /* 适当的空隙让中文字符更有呼吸感 */
+
+    /* 4. 颜色：配合玫瑰灰，建议使用带一点点暖调的白，而不是纯白 */
+    color: #F5F0F0;
+
+    /* 5. 静态美感：由于邮箱不再呼吸，这里也不建议大范围跳动 */
+    /* 给予一个极其微弱的静态光晕，增加文字的厚度感 */
+    text-shadow: 0 0 15px rgba(172, 142, 142, 0.2);
+
+    /* 6. 布局微调 */
+    margin-bottom: 10px;
+    transition: all 0.5s ease;
+}
+
+/* Hover 时的小细节：微微变亮并收缩间距，产生一种“凝聚”感 */
+.intro-text:hover {
+    color: #ffffff;
+    letter-spacing: 0.1em; /* 稍微收紧一点点 */
+    text-shadow: 0 0 20px rgba(172, 142, 142, 0.4);
 }
 
 /* ===== 发光链接类 ===== */
@@ -112,41 +131,33 @@ body {
 /*邮箱图标*/
 /* 紫色呼吸灯动画（和 .glow-link 一样，只换颜色） */
 /* 1. 呼吸动画保持原样 */
-@keyframes mail-glow {
-    0%, 100% {
-        opacity: 0.6;
-        text-shadow: 0 0 5px #a970ff;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 1;
-        text-shadow: 0 0 15px #a970ff, 0 0 25px #c59cff;
-        transform: scale(1.10);
-    }
-}
-
-/* 2. 邮箱图标类 */
+/* 邮箱图标：普通状态 (去掉了动画) */
 .mail-link {
-    color: #a970ff;
+    color: #AC8E8E;           /* 玫瑰灰基础色 */
     text-decoration: none;
     display: inline-block;
     font-size: 3.0rem;
-    animation: mail-glow 4s ease-in-out infinite;
-    transition: all 0.3s ease;
-    /* 强制开启硬件加速，防止滤镜闪烁 */
-    will-change: filter, text-shadow;
+
+    /* 基础状态：适中的透明度，显得沉稳 */
+    opacity: 0.6;
+
+    /* 只有 transform 和 filter 需要过渡 */
+    transition: all 0.5s ease; /* 0.5s 的过渡让激发过程更平滑 */
+    will-change: filter, transform;
 }
 
-/* 3. 修改 Hover 逻辑：使用 drop-shadow 代替 brightness */
+/* 邮箱图标：Hover 状态 (激发柔光) */
 .mail-link:hover {
-    /* 呼吸继续运行 */
+    /* 1. 瞬间提亮：变为不透明 */
+    opacity: 1;
 
-    /* 这里的滤镜只增加阴影，不强行提亮本体颜色，从而保留紫色 */
-    filter: drop-shadow(0 0 15px #a970ff) drop-shadow(0 0 30px #a970ff);
+    /* 2. 颜色微调：hover 时向亮色偏移，模拟点亮感 */
+    color: #D1B3B3;
 
-    /* 微微提升对比度，让颜色更鲜艳而不是变白 */
-    filter: saturate(1.5) drop-shadow(0 0 20px #a970ff);
+    /* 3. 产生柔和光晕：使用 drop-shadow 模拟灯管发出的光晕 */
+    filter: drop-shadow(0 0 10px #AC8E8E) drop-shadow(0 0 20px rgba(172, 142, 142, 0.4));
 
-    /* 确保在呼吸到 0% 时也不会太暗 */
-    opacity: 0.9 !important;
+    /* 4. 微小的放大效果：给予轻微的交互反馈，但不过分显眼 */
+    transform: scale(1.03);
+    cursor: pointer;
 }
