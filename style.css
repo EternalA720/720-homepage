@@ -92,23 +92,43 @@ body {
         0 0 16px #4da3ff;
 }
 
-/* 邮箱图标（紫色呼吸灯，仅 hover 激发） */
-.mail-link {
-    font-size: 3rem;
-    color: #a970ff; /* 紫色 */
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-/* 鼠标悬停时持续激发亮度 */
-.mail-link:hover {
-    animation: mail-glow 2s ease-in-out infinite;
-    text-shadow: 0 0 8px #c59cff, 0 0 16px #a970ff;
-}
-
-/* 呼吸灯关键帧动画 */
+/* 紫色呼吸灯动画（和 .glow-link 一样，只换颜色） */
 @keyframes mail-glow {
-    0%, 100% { text-shadow: 0 0 4px #c59cff, 0 0 8px #a970ff; }
-    50% { text-shadow: 0 0 12px #c59cff, 0 0 24px #a970ff; }
+    0% {
+        opacity: 0.6;
+        text-shadow: 0 0 2px #c59cff, 0 0 4px #a970ff;
+    }
+    25% {
+        opacity: 0.8;
+        text-shadow: 0 0 4px #c59cff, 0 0 8px #a970ff;
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 6px #c59cff, 0 0 12px #a970ff;
+    }
+    75% {
+        opacity: 0.8;
+        text-shadow: 0 0 4px #c59cff, 0 0 8px #a970ff;
+    }
+    100% {
+        opacity: 0.6;
+        text-shadow: 0 0 2px #c59cff, 0 0 4px #a970ff;
+    }
+}
+
+/* 邮箱图标类 */
+.mail-link {
+    color: #a970ff; /* 默认紫色 */
+    text-decoration: none; /* 移除下划线 */
+    display: inline-block;
+    transition: all 0.3s ease;
+    animation: mail-glow 4s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+/* hover 激发更亮光 */
+.mail-link:hover {
+    text-shadow:
+        0 0 12px #c59cff,
+        0 0 24px #a970ff;
+    opacity: 1;
 }
