@@ -1,0 +1,114 @@
+/* ===== 全局样式 ===== */
+body {
+    margin: 0;
+    background-color: #121212;
+    color: #fff;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+/* ===== 首屏 ===== */
+.fullscreen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== 后续内容 ===== */
+.content {
+    min-height: 100vh;
+}
+
+/* ===== 等号分割线 ===== */
+.line {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: monospace;
+}
+
+/* ===== 发光链接类 ===== */
+/*<a href="#" class="glow-link">关于我</a>*/
+/* 呼吸灯动画（流畅版） */
+@keyframes glow {
+    0% {
+        opacity: 0.6;
+        text-shadow: 0 0 2px #4da3ff, 0 0 4px #4da3ff;
+    }
+    25% {
+        opacity: 0.8;
+        text-shadow: 0 0 4px #4da3ff, 0 0 8px #7fc1ff;
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 6px #7fc1ff, 0 0 12px #4da3ff;
+    }
+    75% {
+        opacity: 0.8;
+        text-shadow: 0 0 4px #4da3ff, 0 0 8px #7fc1ff;
+    }
+    100% {
+        opacity: 0.6;
+        text-shadow: 0 0 2px #4da3ff, 0 0 4px #4da3ff;
+    }
+}
+
+/* 应用到发光链接 */
+.glow-link {
+    color: #4da3ff;
+    text-decoration: none;
+    position: relative;
+    animation: glow 4s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+    transition: all 0.3s ease;
+}
+
+/* 下划线（默认隐藏） */
+.glow-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: #4da3ff;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* hover 激发态 */
+.glow-link:hover {
+    opacity: 1;
+    text-shadow: 
+        0 0 12px #7fc1ff,
+        0 0 24px #4da3ff;
+}
+
+/* hover 下划线发光 */
+.glow-link:hover::after {
+    opacity: 1;
+    box-shadow: 
+        0 0 8px #7fc1ff,
+        0 0 16px #4da3ff;
+}
+
+/* 邮箱图标（紫色呼吸灯，仅 hover 激发） */
+.mail-link {
+    font-size: 3rem;
+    color: #a970ff; /* 紫色 */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* 鼠标悬停时持续激发亮度 */
+.mail-link:hover {
+    animation: mail-glow 2s ease-in-out infinite;
+    text-shadow: 0 0 8px #c59cff, 0 0 16px #a970ff;
+}
+
+/* 呼吸灯关键帧动画 */
+@keyframes mail-glow {
+    0%, 100% { text-shadow: 0 0 4px #c59cff, 0 0 8px #a970ff; }
+    50% { text-shadow: 0 0 12px #c59cff, 0 0 24px #a970ff; }
+}
