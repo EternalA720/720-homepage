@@ -26,20 +26,18 @@ body {
 
 /* ===== 后续内容 ===== */
 .content {
-    width: 100%;
-    /* 核心修改：保持至少一屏的高度 */
-    min-height: 100dvh; 
-    
-    /* === 新增这一行 === */
-    /* 它的作用是让内部的 .post-btn 以这块区域的右上角为基准 */
+    /* 1. 必须有相对定位，作为子元素的定位基准 */
     position: relative; 
     
-    /* 确保布局为块级，正常撑开空间 */
+    /* 2. 必须强制撑满宽度，否则“right: 30px”会参考一个缩在一起的容器 */
+    width: 100%;        
+    
+    /* 3. 之前的预留高度 */
+    min-height: 100dvh; 
+    
+    /* 消除任何可能导致偏移的布局干扰 */
     display: block;
     box-sizing: border-box;
-
-    /* 建议加个 padding，防止以后留言板内容直接贴边 */
-    padding: 40px; 
 }
 
 /* ===== 留言板触发按钮（小字 & 居中下方） ===== */
@@ -61,7 +59,7 @@ body {
     overflow: hidden;
     font-family: monospace;
     /* 配合你的暗色风格，建议加一点颜色微调 */
-    color: rgba(255, 255, 255, 0.1); 
+    color: rgba(255, 255, 255, 0.85); 
 }
 
 /* ===== 控制显隐 ===== */
@@ -78,11 +76,21 @@ body {
 
 /* 发布留言文字样式 */
 .post-btn {
-    position: absolute;
-    top: 30px;
-    right: 30px;
+    /* 必须是 absolute */
+    position: absolute; 
+    
+    /* 调整这两个数值来控制贴边距离 */
+    top: 40px;    
+    right: 40px;  
+    
+    /* 确保它在最上层 */
+    z-index: 99;  
+    
+    /* 强制重置可能继承的居中属性 */
+    left: auto;   
+    transform: none; 
+    
     font-size: 0.9rem !important;
-    /* 其他 glow-link 的样式会自动通过 class 应用 */
 }
 
 /* 页脚容器：实现背景区分，但作为次要视觉 */
