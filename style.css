@@ -29,12 +29,77 @@ body {
     min-height: 100vh;
 }
 
-/* ===== 等号分割线 ===== */
+/* ===== 留言板触发按钮（小字 & 居中下方） ===== */
+.msg-board-btn {
+    position: absolute;
+    bottom: 20px;       /* 距离底部 20px */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;  /* 小字 */
+    cursor: pointer;
+    
+    /* 预留样式位置，目前仅做基础控制 */
+}
+
+/* ===== 等号分割线样式 ===== */
 .line {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     font-family: monospace;
+    /* 配合你的暗色风格，建议加一点颜色微调 */
+    color: rgba(255, 255, 255, 0.1); 
+}
+
+/* ===== 控制显隐 ===== */
+.hidden {
+    display: none !important;
+}
+
+/* ===== 第二页基础预留 ===== */
+.content {
+    width: 100%;
+    min-height: 100dvh;
+    /* 此处不应用样式，由你后续自由发挥 */
+}
+
+/* 页脚容器：实现背景区分，但作为次要视觉 */
+.site-footer {
+    width: 100%;
+    padding: 50px 0; /* 增加上下留白，显得更大气 */
+    
+    /* 颜色区分：比主背景 #121212 稍微亮一点的深炭灰 */
+    background-color: #1a1a1a; 
+    
+    /* 顶部细微分割线，增加层次感 */
+    border-top: 1px solid rgba(255, 255, 255, 0.03); 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* 页脚文字：高雅、细长、不抢眼 */
+.footer-inner {
+    /* 这种组合优先调用最漂亮的现代代码字体 */
+    font-family: "JetBrains Mono", "Cascadia Code", "Fira Code", "Courier New", monospace;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    
+    /* 次要颜色：低亮度的灰色 */
+    color: #666666; 
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+/* 版权声明部分的微调 */
+.copyright {
+    margin-bottom: 5px;
+}
+
+.all-rights {
+    opacity: 0.8;
 }
 
 .intro-text {
