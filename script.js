@@ -28,26 +28,26 @@ function fillLine() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 初始执行计算
-    fillLine();
-
-    // 优化点 3：调整窗口大小时使用防抖
-    window.addEventListener("resize", debounce(fillLine, 100));
-
     const msgBtn = document.getElementById('msg-trigger');
     const line = document.getElementById('line');
     const msgPage = document.getElementById('page-msg');
 
     if (msgBtn) {
         msgBtn.addEventListener('click', function() {
+            // 1. 隐藏按钮
             this.classList.add('hidden'); 
 
+            // 2. 移除隐藏类（让元素进入文档流）
             if (line) line.classList.remove('hidden');
             if (msgPage) msgPage.classList.remove('hidden');
 
-            // 再次触发计算，防止隐藏状态下 innerWidth 获取不准
-            fillLine();
+            // 3. 【关键步骤】移除 hidden 后，立即重新计算并填充等号
+            // 此时元素已 display: block，fillLine 才能正确获取宽度并填充内容
+            if (typeof fillLine === "function") {
+                fillLine(); 
+            }
 
+            // 4. 执行滚动
             window.scrollTo({
                 top: line.offsetTop,
                 behavior: 'smooth'
