@@ -24,22 +24,6 @@ body {
     align-items: center;
 }
 
-/* ===== 后续内容 ===== */
-.content {
-    /* 1. 必须有相对定位，作为子元素的定位基准 */
-    position: relative; 
-    
-    /* 2. 必须强制撑满宽度，否则“right: 30px”会参考一个缩在一起的容器 */
-    width: 100%;        
-    
-    /* 3. 之前的预留高度 */
-    min-height: 100dvh; 
-    
-    /* 消除任何可能导致偏移的布局干扰 */
-    display: block;
-    box-sizing: border-box;
-}
-
 /* ===== 留言板触发按钮（小字 & 居中下方） ===== */
 .msg-board-btn {
     position: absolute;
@@ -67,29 +51,36 @@ body {
     display: none !important;
 }
 
-/* ===== 第二页基础预留 ===== */
+/* ===== 第二页基础 ===== */
 .content {
-    width: 100%;
+    /* 1. 必须有这个，否则按钮找不到家 */
+    position: relative; 
+    
+    /* 2. 强制宽度，防止被 body 的 text-align 压缩 */
+    width: 100%; 
     min-height: 100dvh;
-    /* 此处不应用样式，由你后续自由发挥 */
+    
+    /* 3. 修正 body 的居中影响，让内部布局恢复正常 */
+    text-align: left; 
+    
+    display: block;
+    box-sizing: border-box;
 }
 
-/* 发布留言文字样式 */
+/* 发布留言按钮 */
 .post-btn {
-    /* 必须是 absolute */
-    position: absolute; 
+    position: absolute;
+    top: 30px;
+    right: 30px;
     
-    /* 调整这两个数值来控制贴边距离 */
-    top: 40px;    
-    right: 40px;  
+    /* 关键：强制覆盖 body 继承下来的居中 */
+    left: auto; 
+    margin: 0;
     
-    /* 确保它在最上层 */
-    z-index: 99;  
+    /* 确保层级足够高 */
+    z-index: 100;
     
-    /* 强制重置可能继承的居中属性 */
-    left: auto;   
-    transform: none; 
-    
+    /* 缩小字号 */
     font-size: 0.9rem !important;
 }
 
