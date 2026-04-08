@@ -13,7 +13,7 @@ body {
     align-items: center;    /* 水平居中 */
 
     /* 控制三个元素之间的间距 */
-    gap: 25px;
+    gap: 20px;
 }
 
 /* ===== 首屏 ===== */
@@ -128,36 +128,49 @@ body {
             0 0 20px #7fc1ff;
 }
 
-/*邮箱图标*/
-/* 紫色呼吸灯动画（和 .glow-link 一样，只换颜色） */
-/* 1. 呼吸动画保持原样 */
-/* 邮箱图标：普通状态 (去掉了动画) */
+/* 邮箱链接 */
 .mail-link {
+    /* 让它向上移动一点，靠近第一个元素 */
+    margin-top: -5px; 
+    
+    /* 让它向下推开一点，远离第三个元素 */
+    margin-bottom: 60px;
+    
+    /* 1. 核心：选择高雅、细长的字体族 */
+    /* Montserrat 和 Inter 是现代设计的标配，'Arial Narrow' 是系统自带的细长款 */
+    font-family: "Inter", "Montserrat", "Helvetica Neue", "Arial Narrow", sans-serif;
+    
+    /* 2. 尺寸控制：文字邮箱建议在 1.0 - 1.2rem 之间，显得精致 */
+    font-size: 1.1rem; 
+    
+    /* 3. 极细字重：这是“高级感”的来源 */
+    font-weight: 300; 
+    
+    /* 4. 字间距：拉开间距能瞬间提升视觉上的“呼吸感” */
+    letter-spacing: 0.15em; 
+
     color: #AC8E8E;           /* 玫瑰灰基础色 */
     text-decoration: none;
     display: inline-block;
-    font-size: 3.0rem;
-
-    /* 基础状态：适中的透明度，显得沉稳 */
+    
+    /* 基础状态：保持你喜欢的沉稳透明度 */
     opacity: 0.6;
-
-    /* 只有 transform 和 filter 需要过渡 */
-    transition: all 0.5s ease; /* 0.5s 的过渡让激发过程更平滑 */
-    will-change: filter, transform;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* 使用更优雅的贝塞尔曲线 */
+    will-change: filter, transform, letter-spacing;
 }
 
-/* 邮箱图标：Hover 状态 (激发柔光) */
+/* Hover 激发态：优雅的扩张与亮起 */
 .mail-link:hover {
-    /* 1. 瞬间提亮：变为不透明 */
     opacity: 1;
-
-    /* 2. 颜色微调：hover 时向亮色偏移，模拟点亮感 */
-    color: #D1B3B3;
-
-    /* 3. 产生柔和光晕：使用 drop-shadow 模拟灯管发出的光晕 */
-    filter: drop-shadow(0 0 10px #AC8E8E) drop-shadow(0 0 20px rgba(172, 142, 142, 0.4));
-
-    /* 4. 微小的放大效果：给予轻微的交互反馈，但不过分显眼 */
-    transform: scale(1.03);
+    color: #D1B3B3; /* 微微提亮 */
+    
+    /* 💡 小技巧：Hover 时字间距进一步拉开，会有一种“文字在发光并舒张”的错觉 */
+    letter-spacing: 0.25em; 
+    
+    /* 柔和的光晕，不再使用强烈的 drop-shadow */
+    filter: drop-shadow(0 0 8px rgba(172, 142, 142, 0.4));
+    
+    /* 极其轻微的放大，保持稳重 */
+    transform: scale(1.02); 
     cursor: pointer;
 }
