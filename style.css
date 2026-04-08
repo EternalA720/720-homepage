@@ -26,7 +26,20 @@ body {
 
 /* ===== 后续内容 ===== */
 .content {
-    min-height: 100vh;
+    width: 100%;
+    /* 核心修改：保持至少一屏的高度 */
+    min-height: 100dvh; 
+    
+    /* === 新增这一行 === */
+    /* 它的作用是让内部的 .post-btn 以这块区域的右上角为基准 */
+    position: relative; 
+    
+    /* 确保布局为块级，正常撑开空间 */
+    display: block;
+    box-sizing: border-box;
+
+    /* 建议加个 padding，防止以后留言板内容直接贴边 */
+    padding: 40px; 
 }
 
 /* ===== 留言板触发按钮（小字 & 居中下方） ===== */
@@ -48,7 +61,7 @@ body {
     overflow: hidden;
     font-family: monospace;
     /* 配合你的暗色风格，建议加一点颜色微调 */
-    color: rgba(255, 255, 255, 0.85); 
+    color: rgba(255, 255, 255, 0.1); 
 }
 
 /* ===== 控制显隐 ===== */
@@ -61,6 +74,15 @@ body {
     width: 100%;
     min-height: 100dvh;
     /* 此处不应用样式，由你后续自由发挥 */
+}
+
+/* 发布留言文字样式 */
+.post-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 0.9rem !important;
+    /* 其他 glow-link 的样式会自动通过 class 应用 */
 }
 
 /* 页脚容器：实现背景区分，但作为次要视觉 */
