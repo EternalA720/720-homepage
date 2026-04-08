@@ -48,7 +48,7 @@ body {
     overflow: hidden;
     font-family: monospace;
     /* 配合你的暗色风格，建议加一点颜色微调 */
-    color: rgba(255, 255, 255, 0.1); 
+    color: rgba(255, 255, 255, 0.45); 
 }
 
 /* ===== 控制显隐 ===== */
