@@ -52,36 +52,36 @@ body {
 }
 
 /* ===== 第二页基础 ===== */
+/* 修改后的第二页基础 */
 .content {
-    /* 1. 必须有这个，否则按钮找不到家 */
-    position: relative; 
-    
-    /* 2. 强制宽度，防止被 body 的 text-align 压缩 */
+    position: relative; /* 必须保留：作为绝对定位的参考点 */
     width: 100%; 
-    min-height: 100dvh;
+    height: 100vh;      /* 强制高度为一屏 */
+    overflow: hidden;   /* 防止内容溢出产生滚动条 */
     
-    /* 3. 修正 body 的居中影响，让内部布局恢复正常 */
-    text-align: left; 
-    
-    display: block;
+    /* 这里的 display 不要写死，交给 JS 切换 hidden 类 */
     box-sizing: border-box;
+    background-color: #121212; /* 确保背景色一致 */
 }
 
 /* 发布留言按钮 */
+/* 发布留言按钮微调 */
 .post-btn {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 40px;    /* 距离顶部 */
+    right: 40px;  /* 距离右侧 */
     
-    /* 关键：强制覆盖 body 继承下来的居中 */
-    left: auto; 
-    margin: 0;
+    /* 移除所有可能干扰的 margin 和 left */
+    left: auto !important; 
+    margin: 0 !important;
     
-    /* 确保层级足够高 */
-    z-index: 100;
+    z-index: 999; /* 确保在最上层 */
     
-    /* 缩小字号 */
+    /* 继承你写的 glow-link 样式，但微调大小 */
     font-size: 0.9rem !important;
+    padding: 8px 16px;
+    border: 1px solid rgba(77, 163, 255, 0.3); /* 增加一个淡淡的边框更有按钮感 */
+    border-radius: 4px;
 }
 
 /* 页脚容器：实现背景区分，但作为次要视觉 */
