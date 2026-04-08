@@ -1,0 +1,31 @@
+/* style.css */
+
+.face-container {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 16 / 10;
+
+    /* --- 核心：完全透明，不占据任何色块 --- */
+    background: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    container-type: inline-size;
+}
+
+#ascii-face {
+    margin: 0;
+    font-size: 5cqi;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.25;
+
+    /* --- 核心：字符显示为白色 --- */
+    color: #ffffff;
+
+    text-align: center;
+    white-space: pre;
+    user-select: none;
+    pointer-events: none; /* 让鼠标点击穿透字符，点击到背景 */
+}

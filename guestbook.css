@@ -1,0 +1,58 @@
+/* 留言板整体容器 */
+#comment-list {
+    width: 100%;
+    padding: 60px 0;
+}
+
+.char-ui-box {
+    font-family: "Cascadia Code", "JetBrains Mono", "Fira Code", "Courier New", monospace;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 20px auto;
+    display: block;
+    color: #fff;
+}
+
+.row {
+    white-space: pre;
+    display: block;
+    line-height: 20px;
+}
+
+.middle {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.side {
+    flex: 0 0 auto;
+    white-space: pre;
+    line-height: 20px;
+}
+
+.content-inner {
+    flex-grow: 1; /* 填满中间 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 内部第一行：编号与日期 */
+.info-line {
+    display: flex;
+    justify-content: space-between; /* 强制分居两侧 */
+    width: 100%;
+    height: 20px; /* 固定一行高度 */
+    line-height: 20px;
+}
+
+/* 单独控制样式的钩子 */
+.comment-id { color: #4da3ff; }
+.comment-date { color: #AC8E8E; }
+
+/* 评论文本内容 */
+.comment-text {
+    width: 100%;
+    line-height: 20px;
+    word-break: break-all;
+}
