@@ -1,17 +1,21 @@
 /* style.css */
 
 .face-container {
-    width: 100%;
-    max-width: 400px;
+    /* 1. 设定固定宽度，不要只用 100% */
+    width: 300px; 
+    
+    /* 2. 锁定比例 */
     aspect-ratio: 16 / 10;
 
-    /* --- 核心：完全透明，不占据任何色块 --- */
-    background: transparent;
+    /* 3. 核心：防止被其他元素挤压 */
+    flex-shrink: 0; 
 
+    /* 保持你原本的透明和居中设置 */
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
+    margin: -30px auto; /* 增加上下间距，与文字隔开 */
     container-type: inline-size;
 }
 
@@ -27,5 +31,4 @@
     text-align: center;
     white-space: pre;
     user-select: none;
-    pointer-events: none; /* 让鼠标点击穿透字符，点击到背景 */
 }

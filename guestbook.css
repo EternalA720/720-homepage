@@ -1,58 +1,88 @@
-/* 留言板整体容器 */
-#comment-list {
-    width: 100%;
-    padding: 60px 0;
+/* =============================================================================
+   留言框组件 —— 完全封装、无副作用、可嵌入任意页面
+   功能：双线边框、左上/右上角同行、ID 行、自适应高度、响应式、等宽字体
+   ============================================================================= */
+
+/* 主容器：每条留言的外框 */
+.message-box {
+  /* 使用等宽字体栈，优先使用系统等宽字体，确保终端风格 */
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas,
+               'Liberation Mono', Menlo, Courier, monospace;
+
+  /* 设置基础字号，保证在不同设备上可读 */
+  font-size: 14px;
+
+  /* 行高：提升文本可读性，避免文字挤在一起 */
+  line-height: 1.1;
+
+  /* 所有文字颜色设为白色，适配深色或彩色背景 */
+  color: #fff;
+
+  /* 背景设为透明，使留言框能融入任何页面背景（如深色、渐变、图片等） */
+  background-color: transparent;
+
+  /* 宽度：默认占满父容器，但不超过最大宽度 */
+  width: 100%;
+
+  /* 最大宽度限制，防止在超宽屏幕上显得过长，影响阅读体验 */
+  max-width: 800px;
+
+  /* 水平居中，并在下方留出 24px 间距，用于分隔多条留言 */
+  margin: 0 auto 10px;
+
+  /* 内边距：让内容不贴边，保持视觉呼吸感 */
+  padding: 15px;
+
+  /* 双线边框：实现“双线制表符”风格的经典外观 */
+  border: 3px double #aaa; /* 使用浅灰色，避免在白色背景下不可见 */
+
+  /* 确保 padding 和 border 不影响 width 计算，防止布局溢出 */
+  box-sizing: border-box;
 }
 
-.char-ui-box {
-    font-family: "Cascadia Code", "JetBrains Mono", "Fira Code", "Courier New", monospace;
-    font-size: 16px;
-    line-height: 20px;
-    margin: 20px auto;
-    display: block;
-    color: #fff;
+/* 顶部区域：包含左上角和右上角内容（如用户名和时间） */
+.message-box .header {
+  /* 使用 Flex 布局，使两个 span 分别靠左和靠右 */
+  display: flex;
+
+  /* 主轴两端对齐：第一个元素靠左，最后一个靠右 */
+  justify-content: space-between;
+
+  /* 与下方的 ID 行保持 12px 间距 */
+  margin-bottom: 12px;
 }
 
-.row {
-    white-space: pre;
-    display: block;
-    line-height: 20px;
+/* ID 行：显示唯一标识，如 #MSG-123 */
+.message-box .id {
+  /* 与下方正文保持 16px 间距，形成清晰的视觉层级 */
+  margin-bottom: 10px;
+
+  /* ID 文字颜色稍暗一点（但仍为白色系），用于弱化次要信息 */
+  /* 注意：这里仍用白色，但你可以根据需要调整为 #ccc 等 */
+  color: #fff;
 }
 
-.middle {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
+/* 正文内容区域 */
+.message-box .content {
+  /* 保留用户输入的换行符和空格，适合代码、日志或格式化文本 */
+  white-space: pre-wrap;
 }
 
-.side {
-    flex: 0 0 auto;
-    white-space: pre;
-    line-height: 20px;
-}
+/* =============================================================================
+   响应式设计：小屏幕（如手机）优化
+   ============================================================================= */
+@media (max-width: 600px) {
+  /* 在小屏幕上减少内边距，避免浪费宝贵空间 */
+  .message-box {
+    padding: 16px;
+  }
 
-.content-inner {
-    flex-grow: 1; /* 填满中间 */
-    display: flex;
-    flex-direction: column;
-}
+  /* 顶部 header 在窄屏下允许换行，防止左右内容挤压重叠 */
+  .message-box .header {
+    /* 允许子元素换行 */
+    flex-wrap: wrap;
 
-/* 内部第一行：编号与日期 */
-.info-line {
-    display: flex;
-    justify-content: space-between; /* 强制分居两侧 */
-    width: 100%;
-    height: 20px; /* 固定一行高度 */
-    line-height: 20px;
-}
-
-/* 单独控制样式的钩子 */
-.comment-id { color: #4da3ff; }
-.comment-date { color: #AC8E8E; }
-
-/* 评论文本内容 */
-.comment-text {
-    width: 100%;
-    line-height: 20px;
-    word-break: break-all;
+    /* 换行时上下元素之间增加 4px 间距 */
+    gap: 4px;
+  }
 }

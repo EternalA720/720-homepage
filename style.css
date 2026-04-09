@@ -1,87 +1,42 @@
-/* ===== 全局样式 ===== */
 body {
-    margin: 0;
-    background-color: #121212;
-    color: #fff;
-    text-align: center;
-    font-family: sans-serif;
+    margin: 0; /* 清除浏览器默认外边距，确保背景铺满 */
+    background-color: #121212; /* 设置全局深色背景 */
+    color: #fff; /* 设置全局文字颜色为白色 */
+    font-family: sans-serif; /* 设置全局无衬线字体 */
 }
 
 .main-container {
-    display: flex;
-    flex-direction: column; /* 垂直排列 */
-    align-items: center;    /* 水平居中 */
-
-    /* 控制三个元素之间的间距 */
-    gap: 20px;
+    display: flex; /* 启用弹性盒模型 */
+    flex-direction: column; /* 子元素垂直排列 */
+    align-items: center; /* 水平方向居中子元素 */
+    gap: 20px; /* 子元素之间的间距 */
 }
 
-/* ===== 首屏 ===== */
-.fullscreen {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ===== 首屏：强制全屏且内容居中 ===== */
+.page--home {
+    height: 100vh; /* 强制高度为视口高度的 100%，确保全屏 */
+    display: flex; /* 启用弹性盒模型 */
+    justify-content: center; /* 垂直居中内容 */
+    align-items: center; /* 水平居中内容 */
+    text-align: center; /* 内部文字水平居中 */
+    overflow: hidden; /* 首屏通常不需要滚动条 */
 }
 
-/* ===== 留言板触发按钮（小字 & 居中下方） ===== */
-.msg-board-btn {
-    position: absolute;
-    bottom: 20px;       /* 距离底部 20px */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7rem;  /* 小字 */
-    cursor: pointer;
-    
-    /* 预留样式位置，目前仅做基础控制 */
-}
-
-/* ===== 等号分割线样式 ===== */
-.line {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    font-family: monospace;
-    /* 配合你的暗色风格，建议加一点颜色微调 */
-    color: rgba(255, 255, 255, 0.85); 
+/* ===== 第二页：最小一屏，随内容自动扩展 ===== */
+.page--guestbook {
+    position: relative; /* 定位参考点 */
+    width: 100%; /* 宽度撑满 */
+    min-height: 100vh; /* 核心修改：保证至少占据一整屏高度 */
+    display: block; /* 恢复块级布局，方便内容自然流转 */
+    box-sizing: border-box; /* 边框和内边距不撑开宽度 */
+    background-color: #121212; /* 保持背景色一致 */
+    overflow: visible; /* 核心修改：允许内容超出时显示并撑开页面 */
+    padding: 40px 20px; /* 建议保留：防止内容紧贴屏幕边缘 */
 }
 
 /* ===== 控制显隐 ===== */
 .hidden {
     display: none !important;
-}
-
-/* ===== 第二页基础 ===== */
-/* 修改后的第二页基础 */
-.content {
-    position: relative; /* 必须保留：作为绝对定位的参考点 */
-    width: 100%; 
-    height: 100vh;      /* 强制高度为一屏 */
-    overflow: hidden;   /* 防止内容溢出产生滚动条 */
-    
-    /* 这里的 display 不要写死，交给 JS 切换 hidden 类 */
-    box-sizing: border-box;
-    background-color: #121212; /* 确保背景色一致 */
-}
-
-/* 发布留言按钮 */
-/* 发布留言按钮微调 */
-.post-btn {
-    position: absolute;
-    top: 40px;    /* 距离顶部 */
-    right: 40px;  /* 距离右侧 */
-    
-    /* 移除所有可能干扰的 margin 和 left */
-    left: auto !important; 
-    margin: 0 !important;
-    
-    z-index: 999; /* 确保在最上层 */
-    
-    /* 继承你写的 glow-link 样式，但微调大小 */
-    font-size: 0.9rem !important;
-    padding: 8px 16px;
-    border: 1px solid rgba(77, 163, 255, 0.3); /* 增加一个淡淡的边框更有按钮感 */
-    border-radius: 4px;
 }
 
 /* 页脚容器：实现背景区分，但作为次要视觉 */
@@ -123,33 +78,53 @@ body {
     opacity: 0.8;
 }
 
-.intro-text {
-    /* 1. 字体族：优先调用系统中最具设计感的无衬线字体 */
-    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Inter", sans-serif;
-
-    /* 2. 字号与粗细：2.5rem 足够醒目，500-600 的准粗体比纯粗体更精致 */
-    font-size: 2.5rem;
-    font-weight: 600;
-
-    /* 3. 核心美化：增加字间距，这是提升高级感的绝招 */
-    letter-spacing: 0.15em; /* 适当的空隙让中文字符更有呼吸感 */
-
-    /* 4. 颜色：配合玫瑰灰，建议使用带一点点暖调的白，而不是纯白 */
-    color: #F5F0F0;
-
-    /* 5. 静态美感：由于邮箱不再呼吸，这里也不建议大范围跳动 */
-    /* 给予一个极其微弱的静态光晕，增加文字的厚度感 */
-    text-shadow: 0 0 15px rgba(172, 142, 142, 0.2);
-
-    /* 6. 布局微调 */
-    margin-bottom: 10px;
-    transition: all 0.5s ease;
+/* ===== 留言板触发按钮（小字 & 居中下方） ===== */
+.msg-board-btn {
+    position: absolute;
+    bottom: 20px;       /* 距离底部 20px */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;  /* 小字 */
+    cursor: pointer;
+    
+    /* 预留样式位置，目前仅做基础控制 */
 }
 
-/* Hover 时的小细节：微微变亮并收缩间距，产生一种“凝聚”感 */
+/* ===== 等号分割线样式 ===== */
+.line {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: monospace;
+    /* 配合你的暗色风格，建议加一点颜色微调 */
+    color: rgba(255, 255, 255, 0.85); 
+}
+
+.intro-text {
+    /* 字体族：优先调用系统中最具设计感的无衬线字体 */
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Inter", sans-serif;
+
+    /* --- 直接在这里修改数值即可 --- */
+    font-size: 2.0rem; 
+    font-weight: 600;
+
+    /* 增加字间距，提升高级感 */
+    letter-spacing: 0.15em;
+
+    /* 柔和的暖白色 */
+    color: #F5F0F0;
+
+    /* 微弱静态光晕，增强文字厚度 */
+    text-shadow: 0 0 15px rgba(172, 142, 142, 0.2);
+
+    /* 布局与过渡 */
+    margin-bottom: 10px;
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+/* Hover 时仅变亮 */
 .intro-text:hover {
     color: #ffffff;
-    letter-spacing: 0.1em; /* 稍微收紧一点点 */
     text-shadow: 0 0 20px rgba(172, 142, 142, 0.4);
 }
 
