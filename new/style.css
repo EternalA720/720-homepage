@@ -130,3 +130,67 @@ body {
 .all-rights {
     opacity: 0.8;
 }
+
+
+/* 1. 定义深蓝色调的呼吸动画 */
+@keyframes link-pulse {
+    0%, 100% {
+        color: #1f6feb; /* 较暗的蓝色，保持深邃感 */
+        text-shadow: 0 0 5px rgba(31, 111, 235, 0.3);
+    }
+    50% {
+        color: #58a6ff; /* 中间态的明亮 */
+        text-shadow: 0 0 15px rgba(88, 166, 255, 0.6);
+    }
+}
+
+.link {
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease; /* 用于平滑切换到高亮态 */
+
+    /* 应用呼吸动画 */
+    animation: link-pulse 4s ease-in-out infinite;
+}
+
+/* 2. 下划线重置与初始化 */
+.link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #79c0ff; /* 激发态的颜色 */
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+    /* 增加下划线的微弱发光 */
+    box-shadow: 0 0 8px rgba(121, 192, 255, 0.8);
+}
+
+/* 3. Hover 状态：停止呼吸 + 瞬间激发高亮 */
+.link:hover {
+    /* 核心逻辑：立即停止当前帧的动画 */
+    animation-play-state: paused;
+
+    /* 激发极亮蓝色 */
+    color: #c9d1d9; /* 接近白色的蓝灰色，在深色背景下极具穿透力 */
+
+    /* 增强文字发光感 */
+    text-shadow:
+            0 0 10px #58a6ff,
+            0 0 20px #1f6feb,
+            0 0 40px rgba(88, 166, 255, 0.4);
+
+    /* 整体亮度提升 */
+    filter: brightness(1.2);
+}
+
+/* 4. Hover 时显示下划线 */
+.link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
