@@ -1,0 +1,132 @@
+/* ============================================================
+   1. 全局初始化：html 和 body 共同决定了页面的“地基”
+   ============================================================ */
+html, body {
+    margin: 0;           /* 彻底清除浏览器默认的 8px 外边距 */
+    padding: 0;          /* 清除默认内边距 */
+    width: 100%;         /* 宽度撑满 */
+    height: 100%;        /* 核心：确保 body 能继承到相对于窗口的高度 */
+    overflow-x: hidden;  /* 严禁横向溢出，防止手机端左右晃动 */
+    scroll-behavior: smooth; /* 跨页面滚动时丝滑过渡 */
+}
+
+/* ============================================================
+   2. 样式基准：body 负责全局的视觉风格
+   ============================================================ */
+body {
+    background-color: #161b22; /* 你的深色背景 */
+    color: #c9d1d9;           /* 你的文字颜色 */
+    font-family: sans-serif;   /* 默认无衬线字体 */
+    
+    /* 字体渲染优化：让文字在深色背景下更清晰，不发虚 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* 现代移动端优化：防止点击链接时出现蓝色高亮框，保持干净的交互感 */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================================
+   3. 首页容器：.page--home 负责占满屏幕且不被导航栏干扰
+   ============================================================ */
+.page--home {
+    /* 宽度与盒模型控制 */
+    width: 100%;
+    box-sizing: border-box; /* 无论加不加 padding，高度永远精准锁定 */
+
+    /* --- 核心高度方案 --- */
+    height: 100vh;          /* 基础回退方案 */
+    height: 100dvh;         /* 现代方案：动态感应手机导航栏，确保不被遮挡 */
+
+    /* --- 布局逻辑：让首页内容永远保持在正中心 --- */
+    /*display: flex;*/
+    flex-direction: column; /* 内容上下排列 */
+    /*justify-content: center; /* 垂直居中 */
+    /*align-items: center;    /* 水平居中 */
+
+    /* --- 细节增强 --- */
+    position: relative;     /* 为以后的绝对定位元素（如装饰、背景图）提供参考 */
+    overflow: hidden;       /* 确保首页本身不会产生多余滚动条 */
+    
+    /* 针对移动端触摸优化的防抖逻辑 */
+    touch-action: pan-y;    /* 允许垂直滑动到下一页，但阻止其他方向的干扰 */
+}
+
+/* ============================================================
+   4. 极致兼容补丁
+   ============================================================ */
+@supports not (height: 100dvh) {
+    .page--home {
+        /* 如果浏览器太旧不支持 dvh，则利用 html,body 的 100% 高度进行填充 */
+        height: 100%;
+    }
+}
+
+/* 留言板页面容器 */
+.page--guestbook {
+    display: none; 
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+/* 激活状态 */
+.page--guestbook.is-active {
+    display: block;
+}
+
+/* 自定义分隔符 */
+.line {
+    width: 100%;
+    overflow: hidden;       /* 隐藏超出部分 */
+    white-space: nowrap;    /* 强制不换行 */
+    font-family: monospace; /* 必须是等宽字体 */
+    user-select: none;      /* 无法被选中 */
+    /* 已移除 margin-bottom */
+}
+
+.line::before {
+    /* 足够长的等号确保覆盖任何分辨率 */
+    content: "================================================================================================================================================================================================================================================================================================================================================================================================================================";
+    display: block;
+}
+
+/* 页脚容器 */
+.site-footer {
+    width: 100%;
+    padding: 50px 0; /* 增加上下留白，显得更大气 */
+    
+    /* 颜色区分：比主背景 #121212 稍微亮一点的深炭灰 */
+    background-color: #161b22; 
+    
+    /* 顶部细微分割线，增加层次感 */
+    border-top: 1px solid rgba(255, 255, 255, 0.03); 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* 页脚文字：高雅、细长、不抢眼 */
+.footer-inner {
+    /* 这种组合优先调用最漂亮的现代代码字体 */
+    font-family: "JetBrains Mono", "Cascadia Code", "Fira Code", "Courier New", monospace;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    
+    /* 次要颜色：低亮度的灰色 */
+    color: #7d8590; 
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+/* 版权声明部分的微调 */
+.copyright {
+    margin-bottom: 5px;
+}
+
+.all-rights {
+    opacity: 0.8;
+}
