@@ -1,0 +1,51 @@
+/* 容器布局 */
+.message-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  /* 控制留言框横向与屏幕间的距离 */
+  padding: 0 5%;
+  justify-items: start; /* 留言框宽度自适应，不强制拉伸 */
+}
+
+/* 留言框主体样式 */
+.message {
+  position: relative;        /* 必须为 relative 供子元素定位 */
+  font-family: monospace;    /* 等宽字体 */
+  width: fit-content;        /* 宽度由内容决定 */
+  max-width: 100%;           /* 防止超出屏幕 */
+  border: 4px double #000;   /* 双线制表符效果 */
+  
+  /* 关键：预留足够的内边距，确保内部定位元素不与边框重叠 */
+  padding: 25px 15px 15px 15px; 
+}
+
+/* --- 仅定位逻辑 --- */
+
+/* 左上角 */
+.message-number {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+}
+
+/* 右上角 */
+.message-date {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+}
+
+/* 名字：在上述两者下方，向左顶格 */
+.message-name {
+  display: block;
+  margin-bottom: 8px;        /* 与下方正文的间距 */
+  width: 100%;               /* 确保独占一行 */
+  /* 这里不需要 absolute，因为它作为正常流会自然排在 padding 下方 */
+}
+
+/* 正文内容 */
+.message-content {
+  display: block;
+  word-break: break-all;     /* 防止长字符串撑破框体 */
+}
